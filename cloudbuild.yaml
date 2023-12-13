@@ -21,4 +21,4 @@ artifacts:
     - 'deployments/guestbook-ui-svc.yaml'
 
 options:
-  logging: NONE
+  logging: CLOUD_LOGGING_ONLY
