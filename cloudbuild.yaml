@@ -29,4 +29,5 @@ artifacts:
 
 secrets:
   - versionedName: access-token
-    env: 'access-token'
+    secretEnv:
+      ACCESS_TOKEN: /root/gcloud/application_default_credentials.json
