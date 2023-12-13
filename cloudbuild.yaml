@@ -1,13 +1,4 @@
 steps:
-- name: gcloud config test
-  id: setup-config
-  entrypoint: /bin/bash
-  args:
-  - -c
-  - |
-    gcloud config set project big-query-406006
-    gcloud auth configure-docker
-
 - name: Build container image
   id: build-image
   entrypoint: docker
