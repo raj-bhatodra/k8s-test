@@ -21,4 +21,4 @@ artifacts:
     - 'deployments/guestbook-ui-svc.yaml'
 
 options:
-  logging: REGIONAL_USER_OWNED_BUCKET
+  logging: NONE
