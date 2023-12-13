@@ -8,10 +8,3 @@ steps:
 substitutions:
   _YOUR_GCP_PROJECT_ID: big-query-406006
   _YOUR_GKE_CLUSTER_NAME: autopilot-cluster-1
-
-artifacts:
-  objects:
-    location: 'gs://logs-test1/cloudbuild/'
-    paths:
-    - 'deployments/guestbook-ui-deployment.yaml'
-    - 'deployments/guestbook-ui-svc.yaml'
