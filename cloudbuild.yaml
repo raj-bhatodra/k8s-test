@@ -30,10 +30,7 @@ substitutions:
 
 artifacts:
   objects:
-  - paths:
-    - deployments/guestbook-ui-deployment.yaml
-    - deployments/guestbook-ui-svc.yaml
-    
-secrets:
-  'access-token':
-    path: /root/gcloud/application_default_credentials.json
+    location: 'gs://your-bucket-name/cloudbuild/'
+    paths:
+    - 'deployments/guestbook-ui-deployment.yaml'
+    - 'deployments/guestbook-ui-svc.yaml'
