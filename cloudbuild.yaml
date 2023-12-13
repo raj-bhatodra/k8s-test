@@ -12,5 +12,4 @@ substitutions:
 options:
   logging: CLOUD_LOGGING_ONLY
 
-build:
-  logsBucket: 'gs://logsbuild'
+logsBucket: 'gs://logsbuild/'
