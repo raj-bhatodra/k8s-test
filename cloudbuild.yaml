@@ -1,30 +1,32 @@
 steps:
-- name: Build container image
+- name: 'gcr.io/cloud-builders/docker'
   id: build-image
-  entrypoint: docker
   args:
   - build
-  - -t gcr.io/big-query-406006/guestbook-ui:latest
+  - -t
+  - gcr.io/big-query-406006/guestbook-ui:latest
   - .
-- name: Deploy to GKE
+
+- name: 'gcr.io/cloud-builders/kubectl'
   id: deploy-to-cluster
-  entrypoint: kubectl
   args:
   - apply
-  - -f deployments/guestbook-ui-deployment.yaml
-  - -f deployments/guestbook-ui-svc.yaml
-  - --cluster=autopilot-cluster-1
+  - -f
+  - deployments/guestbook-ui-deployment.yaml
+  - -f
+  - deployments/guestbook-ui-svc.yaml
 
 substitutions:
-  YOUR_GCP_PROJECT_ID: big-query-406006
-  YOUR_GKE_CLUSTER_NAME: autopilot-cluster-1
+  _YOUR_GCP_PROJECT_ID: big-query-406006
+  _YOUR_GKE_CLUSTER_NAME: autopilot-cluster-1
 
 artifacts:
   objects:
-  - paths:
-    - deployments/guestbook-ui-deployment.yaml
-    - deployments/guestbook-ui-svc.yaml
+    location: 'gs://your-bucket-name/cloudbuild/'
+    paths:
+    - 'deployments/guestbook-ui-deployment.yaml'
+    - 'deployments/guestbook-ui-svc.yaml'
 
 secrets:
-  'access-token':
-    path: /root/gcloud/application_default_credentials.json
+  - versionedName: access-token
+    env: 'access-token'
