@@ -15,6 +15,3 @@ artifacts:
     paths:
     - 'deployments/guestbook-ui-deployment.yaml'
     - 'deployments/guestbook-ui-svc.yaml'
-
-options:
-  logging: logs-test1
