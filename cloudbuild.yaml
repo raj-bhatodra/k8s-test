@@ -19,6 +19,3 @@ artifacts:
     paths:
     - 'deployments/guestbook-ui-deployment.yaml'
     - 'deployments/guestbook-ui-svc.yaml'
-
-options:
-  logging: CLOUD_LOGGING_ONLY
