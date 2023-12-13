@@ -1,12 +1,13 @@
 steps:
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['container', 'clusters', 'get-credentials', 'autopilot-cluster-1', '--zone', 'us-central1']
+
 - name: 'gcr.io/cloud-builders/kubectl'
-  id: deploy-to-cluster
-  args:
-  - apply
-  - -f
-  - deployments/guestbook-ui-deployment.yaml
-  - -f
-  - deployments/guestbook-ui-svc.yaml
+  args: ['apply', '-f', 'deployments/guestbook-ui-deployment.yaml', '-f', 'deployments/guestbook-ui-svc.yaml']
+  env:
+  - 'CLOUDSDK_COMPUTE_REGION=us-central1'
+  - 'CLOUDSDK_COMPUTE_ZONE=us-central1'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=autopilot-cluster-1'
 
 substitutions:
   _YOUR_GCP_PROJECT_ID: big-query-406006
