@@ -34,3 +34,7 @@ artifacts:
   - paths:
     - deployments/guestbook-ui-deployment.yaml
     - deployments/guestbook-ui-svc.yaml
+    
+secrets:
+  'access-token':
+    path: /root/gcloud/application_default_credentials.json
