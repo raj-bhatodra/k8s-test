@@ -1,13 +1,36 @@
 steps:
-- name: 'gcr.io/cloud-builders/gcloud'
-  args: ['container', 'clusters', 'get-credentials', 'autopilot-cluster-1', '--zone', 'us-central1']
-- name: 'gcr.io/cloud-builders/kubectl'
-  args: ['apply', '-f', 'guestbook-ui-deployment.yaml', '-f', 'guestbook-ui-svc.yaml']
-- name: 'gcr.io/cloud-builders/kubectl'
-  args: ['set', 'image', 'deployment/guestbook-ui', 'guestbook-ui=gcr.io/heptio-images/ks-guestbook-demo:0.2']
-- name: 'gcr.io/cloud-builders/kubectl'
-  args: ['expose', 'deployment', 'guestbook-ui', '--type=LoadBalancer', '--name=guestbook-ui-lb']
+- name: gcloud config
+  id: setup-config
+  entrypoint: /bin/bash
+  args:
+  - -c
+  - |
+    gcloud config set project big-query-406006
+    gcloud auth configure-docker
 
-options:
-  logging: CLOUD_LOGGING_ONLY
-  defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
+- name: Build container image
+  id: build-image
+  entrypoint: docker
+  args:
+  - build
+  - -t gcr.io/big-query-406006/guestbook-ui:latest
+  - .
+
+- name: Deploy to GKE
+  id: deploy-to-cluster
+  entrypoint: kubectl
+  args:
+  - apply
+  - -f deployments/guestbook-ui-deployment.yaml
+  - -f deployments/guestbook-ui-svc.yaml
+  - --cluster=autopilot-cluster-1
+
+substitutions:
+  YOUR_GCP_PROJECT_ID: big-query-406006
+  YOUR_GKE_CLUSTER_NAME: autopilot-cluster-1
+
+artifacts:
+  objects:
+  - paths:
+    - deployments/guestbook-ui-deployment.yaml
+    - deployments/guestbook-ui-svc.yaml
