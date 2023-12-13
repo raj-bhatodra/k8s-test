@@ -1,12 +1,4 @@
 steps:
-- name: 'gcr.io/cloud-builders/docker'
-  id: build-image
-  args:
-  - build
-  - -t
-  - gcr.io/big-query-406006/guestbook-ui:latest
-  - .
-
 - name: 'gcr.io/cloud-builders/kubectl'
   id: deploy-to-cluster
   args:
@@ -17,8 +9,8 @@ steps:
   - deployments/guestbook-ui-svc.yaml
 
 substitutions:
-  _YOUR_GCP_PROJECT_ID: big-query-406006
-  _YOUR_GKE_CLUSTER_NAME: autopilot-cluster-1
+  YOUR_GCP_PROJECT_ID: big-query-406006
+  YOUR_GKE_CLUSTER_NAME: autopilot-cluster-1
 
 artifacts:
   objects:
