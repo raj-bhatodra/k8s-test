@@ -6,7 +6,6 @@ steps:
   - build
   - -t gcr.io/big-query-406006/guestbook-ui:latest
   - .
-
 - name: Deploy to GKE
   id: deploy-to-cluster
   entrypoint: kubectl
@@ -14,6 +13,7 @@ steps:
   - apply
   - -f deployments/guestbook-ui-deployment.yaml
   - -f deployments/guestbook-ui-svc.yaml
+  - --cluster=autopilot-cluster-1
 
 substitutions:
   YOUR_GCP_PROJECT_ID: big-query-406006
@@ -21,7 +21,10 @@ substitutions:
 
 artifacts:
   objects:
-    location: 'gs://your-bucket-name/cloudbuild/'
-    paths:
-    - 'deployments/guestbook-ui-deployment.yaml'
-    - 'deployments/guestbook-ui-svc.yaml'
+  - paths:
+    - deployments/guestbook-ui-deployment.yaml
+    - deployments/guestbook-ui-svc.yaml
+
+secrets:
+  'access-token':
+    path: /root/gcloud/application_default_credentials.json
