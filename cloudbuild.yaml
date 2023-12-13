@@ -23,7 +23,6 @@ steps:
   - apply
   - -f deployments/guestbook-ui-deployment.yaml
   - -f deployments/guestbook-ui-svc.yaml
-  - --cluster=autopilot-cluster-1
 
 substitutions:
   YOUR_GCP_PROJECT_ID: big-query-406006
