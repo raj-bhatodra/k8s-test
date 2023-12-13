@@ -1,5 +1,5 @@
 steps:
-- name: gcloud config
+- name: gcloud config test
   id: setup-config
   entrypoint: /bin/bash
   args:
