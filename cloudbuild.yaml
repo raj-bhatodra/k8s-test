@@ -4,10 +4,6 @@ steps:
 
 - name: 'gcr.io/cloud-builders/kubectl'
   args: ['apply', '-f', 'deployments/guestbook-ui-deployment.yaml', '-f', 'deployments/guestbook-ui-svc.yaml']
-  env:
-  - 'CLOUDSDK_COMPUTE_REGION=us-central1'
-  - 'CLOUDSDK_COMPUTE_ZONE=us-central1'
-  - 'CLOUDSDK_CONTAINER_CLUSTER=autopilot-cluster-1'
 
 substitutions:
   _YOUR_GCP_PROJECT_ID: big-query-406006
@@ -15,10 +11,10 @@ substitutions:
 
 artifacts:
   objects:
-    location: 'gs://your-bucket-name/cloudbuild/'
+    location: 'gs://logs-test1/cloudbuild/'
     paths:
     - 'deployments/guestbook-ui-deployment.yaml'
     - 'deployments/guestbook-ui-svc.yaml'
 
 options:
-  logging: logs-test123
+  logging: logs-test1
