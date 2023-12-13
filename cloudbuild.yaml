@@ -5,3 +5,7 @@ steps:
   args: ['set', 'image', 'deployment/guestbook-ui', 'guestbook-ui=gcr.io/heptio-images/ks-guestbook-demo:0.2']
 - name: 'gcr.io/cloud-builders/kubectl'
   args: ['expose', 'deployment', 'guestbook-ui', '--type=LoadBalancer', '--name=guestbook-ui-lb']
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+  defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
